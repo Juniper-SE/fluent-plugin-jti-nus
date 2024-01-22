@@ -4,7 +4,7 @@
 
 
 
-__jti-nus__ stands for __J__uniper __T__elemetry __I__nterface __N__ative __U__DP __S__ensors
+**jti-nus** stands for **J**uniper __T__elemetry __I__nterface __N__ative __U__DP __S__ensors
 
 
 
