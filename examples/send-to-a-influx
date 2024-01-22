@@ -1,0 +1,21 @@
+#
+# change all of the following to match your environment
+#
+#   _IP-address-of-the-influx2-server_    (Note: it can be localhost)
+#   _port-it-is-listening-on_             (Note: influx uses 8086 by default)
+#   _replace-all-of-this-with-your-token_
+#   _influx-dbname_
+#   _influx-user_
+#   _influx-password_
+#
+<match JuniperNetworks.**>
+  @type influxdb
+  host _IP-address-of-the-influx-server_
+  port _port-it-is-listening-on_
+  _influx-dbname_
+  _influx-user_
+  _influx-password_
+  use_ssl false
+  time_precision s
+  sequence_tag _seq
+</match>

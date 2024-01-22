@@ -1,0 +1,16 @@
+#
+# change all of the following to match your environment
+#
+#   _IP-address-of-the-influx2-server_    (Note: it can be localhost)
+#   _port-it-is-listening-on_             (Note: influxdb2 uses 8086 by default)
+#   _replace-all-of-this-with-your-token_
+#   _bucket-name_
+#   _organization-name_
+#
+<match JuniperNetworks.**>
+  @type influxdb2
+  url   https://_IP-address-of-the-influx2-server_:_port-it-is-listening-on_
+  token _replace-all-of-this-with-your-token_
+  bucket _bucket-name_
+  org _organization-name_
+</match>
