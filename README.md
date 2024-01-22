@@ -3,9 +3,8 @@
 ## Overview
 
 
-
 <pre>
-jti-nus stands for J uniper
+jti_nus stands for J uniper   
                    T elemetry
                    I nterface
                    N ative
