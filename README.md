@@ -19,6 +19,8 @@ Juniper Native sensor data are Google Protobuf messages sent over UDP. Hence thi
 
 Data from all the sensors are emitted with same tag. So if you want to distinguish data from different sensors, then `rewrite_tag_filter` should be used.
 What this means is, in case if you want to store the data in databases, by default all the data will be stored in single table/measurement.
+
+
 If you want the data to be stored separately per sensor, then you have to use `rewrite_tag_filter` plugin. Configs examples are given below.
 
 
@@ -43,12 +45,16 @@ Download the plugin from `https://git.juniper.net/jawroper/fluent-plugin-jti-nus
 
 Change directory to `<path-of-download>/fluent-plugin-jti-nus`
 
+
 When using the fluentd agent
+
   Build using `fluent-gem build fluent-plugin-jti-nus.gemspec`
 
   Install using `fluent-gem install fluent-plugin-jti-nus-1.0.0.gem`
 
+
 When using the td-agent
+
   Build using `gem build fluent-plugin-jti-nus.gemspec`
 
   Install using `gem install fluent-plugin-jti-nus-1.0.0.gem`
