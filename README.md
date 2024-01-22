@@ -2,7 +2,11 @@
 
 ## Overview
 
-jti-nus stands for Juniper Telemetry Interface Native UDP Sensors
+
+
+__jti-nus__ stands for __J__uniper __T__elemetry __I__nterface __N__ative __U__DP __S__ensors
+
+
 
 This plugin is designed to parse the Juniper Native sensors data.
 
@@ -25,7 +29,7 @@ If you want the data to be stored separately per sensor, then you have to use `r
 * Data from UDP listener will be passed to the parser plugin that is written in here
 * In case of changes to sensor definition, the proto files have to be recompiled to appropriate library based on the collector and added to the plugin repository
 * Timestamp, system_id from the JTI message and hostname on which the collector is running is added to all the entries
-* Enable jumbo frames on the devices sending the telemetry to avoid fragmented packets
+* Enable jumbo frames on the devices sending the telemetry to avoid empty fragmented packets being transmitted and the plugin logging them as error packets
 
 
 ## Installation
@@ -88,8 +92,7 @@ On starting fluentd, Logging supported like below.
 ## ACKNOWLEDGEMENT
 
 This work is based on the Juniper/fluent-plugin-udp-native-sensors github repo
-created by Vijay Gadde in 2017. All of the sensors and 98% of the logic was  
-replaced, so I decided to create a new repo.
+created by Vijay Gadde in 2017. All of the sensors and 98% of the logic was replaced, so I decided to create a new repo.
 
 ## TODO
 
