@@ -1,9 +1,7 @@
 #
 # change all of the following to match your environment
 #
-#   _directory-to-create-the-file-in_    (Note: the directory needs to be
-#                                               writeable and the output file
-#                                               with start with the word buffer)
+#   _directory-to-create-the-file-in_    (Note: the directory needs to be writeable and the output file will start with the word buffer)
 #
 <match JuniperNetworks.**>
   @type file
