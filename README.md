@@ -50,14 +50,14 @@ When using the fluentd agent
 
 &nbsp;&nbsp;&nbsp;&nbsp;Build using `fluent-gem build fluent-plugin-jti-nus.gemspec`
 
-&nbsp;&nbsp;&nbsp;&nbsp;Install using `fluent-gem install fluent-plugin-jti-nus-1.0.0.gem`
+&nbsp;&nbsp;&nbsp;&nbsp;Install using `sudo fluent-gem install fluent-plugin-jti-nus-1.0.0.gem`
 
 
 When using the td-agent
 
 &nbsp;&nbsp;&nbsp;&nbsp;Build using `gem build fluent-plugin-jti-nus.gemspec`
 
-&nbsp;&nbsp;&nbsp;&nbsp;Install using `gem install fluent-plugin-jti-nus-1.0.0.gem`
+&nbsp;&nbsp;&nbsp;&nbsp;Install using `sudo gem install fluent-plugin-jti-nus-1.0.0.gem`
 
 
 ## Configuration
