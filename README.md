@@ -48,16 +48,16 @@ Change directory to `<path-of-download>/fluent-plugin-jti-nus`
 
 When using the fluentd agent
 
-  Build using `fluent-gem build fluent-plugin-jti-nus.gemspec`
+&nbsp;&nbsp;Build using `fluent-gem build fluent-plugin-jti-nus.gemspec`
 
-  Install using `fluent-gem install fluent-plugin-jti-nus-1.0.0.gem`
+&nbsp;&nbsp;Install using `fluent-gem install fluent-plugin-jti-nus-1.0.0.gem`
 
 
 When using the td-agent
 
-  Build using `gem build fluent-plugin-jti-nus.gemspec`
+&nbsp;&nbsp;Build using `gem build fluent-plugin-jti-nus.gemspec`
 
-  Install using `gem install fluent-plugin-jti-nus-1.0.0.gem`
+&nbsp;&nbsp;Install using `gem install fluent-plugin-jti-nus-1.0.0.gem`
 
 
 ## Configuration
