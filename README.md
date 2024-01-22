@@ -4,13 +4,14 @@
 
 
 
-jti-nus stands for J uniper 
+<pre>
+jti-nus stands for J uniper
                    T elemetry
                    I nterface
                    N ative
                    U DP
                    S ensors
-
+</pre>
 
 
 This plugin is designed to parse the Juniper Native sensors data.
