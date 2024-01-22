@@ -8,7 +8,7 @@
 #   _influx-user_
 #   _influx-password_
 #
-<match JuniperNetworks.**>
+<match JuniperNetworks.*.*>
   @type influxdb
   host _IP-address-of-the-influx-server_
   port _port-it-is-listening-on_

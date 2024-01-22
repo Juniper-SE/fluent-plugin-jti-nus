@@ -9,7 +9,7 @@
 #   _influx-user_
 #   _influx-password_
 #
-<match JuniperNetworks.**>
+<match JuniperNetworks.*.*>
   @type copy
   @id output_copy
   <store>

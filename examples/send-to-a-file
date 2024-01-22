@@ -3,7 +3,7 @@
 #
 #   _directory-to-create-the-file-in_    (Note: the directory needs to be writeable and the output file will start with the word buffer)
 #
-<match JuniperNetworks.**>
+<match JuniperNetworks.*.*>
   @type file
   @id output_file
   path _directory-to-create-the-file-in_
