@@ -145,7 +145,7 @@ require 'xmlproxyd_show_local_interface_OC_pb'
 module Fluent::Plugin
     class JuniperJtiParser < Parser
 
-      Fluent::Plugin.register_parser("juniper_udp_native", self)
+      Fluent::Plugin.register_parser("jti_nus", self)
 
       config_param :output_format, :string, :default => 'structured'
 
