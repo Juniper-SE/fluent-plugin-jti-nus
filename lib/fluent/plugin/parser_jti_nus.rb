@@ -244,8 +244,8 @@ module Fluent::Plugin
           #   because of an issue in protoc version 25 with ruby output
           #   we need to remove the next hash key because it shows
           #   as an extension
-          #jnpr_sensors = sensors_decoded["[juniperNetworks]"]
-          jnpr_sensors = sensors_decoded["[juniperNetworks]"].values.first
+          jnpr_sensors = sensors_decoded["[juniperNetworks]"]
+          #jnpr_sensors = sensors_decoded["[juniperNetworks]"].values.first
           $log.debug  "Extract sensor data from #{device_name} with output #{output_format}"
           $log.debug "=============================================================="
           $log.debug "TEXT: #{text}"
@@ -267,8 +267,8 @@ module Fluent::Plugin
           #     or
           # strip the 1st part of the 1st key
           determinant_sensors.each do |element|
-            modified_key = element.transform_keys { |key| key.gsub(/[\[\]]/, '') }
-            #modified_key = element.transform_keys { |key| key.split('.').drop(1).join('.') }
+            #modified_key = element.transform_keys { |key| key.gsub(/[\[\]]/, '') }
+            modified_key = element.transform_keys { |key| key.split('.').drop(1).join('.') }
             element.replace(modified_key)
           end
 
