@@ -17,7 +17,7 @@ This plugin is designed to parse the Juniper Native sensors data.
 
 Juniper Native sensor data are Google Protobuf messages sent over UDP. Hence this plugin should be used with UDP input plugin.
 
-Data from all the sensors are emitted with the same tag. What this means is by default all the data will be stored in a single table/measurement. If you want to distinguish data from different sensors and have it stored separately per sensor, then you must use the `rewrite_tag_filter` plugin. Configs examples are given below.
+Data from all the sensors are emitted with the same tag. What this means is by default all the data will be stored in a single table/measurement. If you want to distinguish data from different sensors and have them stored separately per sensor, then you must use the `rewrite_tag_filter` plugin. Configs examples are given below.
 
 
 ### Protobuf files
