@@ -36,7 +36,7 @@ If you want the data to be stored separately per sensor, then you have to use `r
 * Data from UDP listener will be passed to the parser plugin that is written in here
 * In case of changes to sensor definition, the proto files have to be recompiled to appropriate library based on the collector and added to the plugin repository
 * Timestamp, system_id from the JTI message and hostname on which the collector is running is added to all the entries
-* On Linux servers you need to install build-essential before building the gemß
+* On Linux servers you need to install build-essential before building the gem
 * Enable jumbo frames on the devices sending the telemetry to avoid empty fragmented packets being transmitted and the plugin logging them as error packets
 
 
