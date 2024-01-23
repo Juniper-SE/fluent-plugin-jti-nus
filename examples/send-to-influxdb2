@@ -7,7 +7,7 @@
 #   _bucket-name_
 #   _organization-name_
 #
-<match JuniperNetworks.*.*>
+<match JuniperNetworks.*>
   @type influxdb2
   url   https://_IP-address-of-the-influx2-server_:_port-it-is-listening-on_
   token _replace-all-of-this-with-your-token_
