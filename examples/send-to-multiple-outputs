@@ -16,11 +16,12 @@
      @type influxdb
      host _IP-address-of-the-influx-server_
      port _port-it-is-listening-on_
-     _influx-dbname_
-     _influx-user_
-     _influx-password_
-     use_ssl false
-     time_precision s
+     dbname _influx-dbname_
+     user _influx-user_
+     password _influx-password_
+     time_key time
+     time_precision 'ms'
+     tag_keys ["device","host","sensor_name"]
      sequence_tag _seq
   </store>
   <store>
