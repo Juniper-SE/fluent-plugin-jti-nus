@@ -147,19 +147,18 @@ module Fluent::Plugin
 
       Fluent::Plugin.register_parser("jti_nus", self)
 
-      config_param :output_format, :string, :default => 'structured'
+      # if you are using custom configuration parameters, here is an example
+      # config_param :out_format, :string, default: 'json'
 
-      # This method is called after config_params have read configuration parameters
+      # This method is automatically called by fluentd to allow processing of configuration parameters
       def configure(conf)
         super
-
-        ## Check if "output_format" has a valid value
-        unless  @output_format.to_s == "structured" ||
-                @output_format.to_s == "flat" ||
-                @output_format.to_s == "statsd"
-
-          raise ConfigError, "output_format value '#{@output_format}' is not valid. Must be : structured, flat or statsd"
-        end
+        ## Check if "out_format" has a valid value
+        #unless  @out_format.to_s == "json" ||
+        #        @out_format.to_s == "msgpack" ||
+        #        @out_format.to_s == "csv"
+        #  raise ConfigError, "output_format value '#{@output_format}' is not valid. Must be : json, msgpack or csv"
+        #end
       end
 
       #
@@ -208,6 +207,9 @@ module Fluent::Plugin
             # if the value is an array and the first item is a hash
             parse_hash(phvalue.first, new_key)
           else
+            # if the value is a number in string format, convert it to a real number
+            phvalue = phvalue.to_i if phvalue.is_a?(String) && phvalue.match?(/\A\d+\z/)
+            phvalue = phvalue.to_f if phvalue.is_a?(String) && phvalue.match?(/\A\d+(\.\d+)?\z/)
             # creates a hash using the flattened key and sets the value
             #    for the output array
             { new_key.join('.') => phvalue }
@@ -246,7 +248,7 @@ module Fluent::Plugin
           #   as an extension
           jnpr_sensors = sensors_decoded["[juniperNetworks]"]
           #jnpr_sensors = sensors_decoded["[juniperNetworks]"].values.first
-          $log.debug  "Extract sensor data from #{device_name} with output #{output_format}"
+          $log.debug  "Extract sensor data from #{device_name}"
           $log.debug "=============================================================="
           $log.debug "TEXT: #{text}"
           $log.debug "JTI_MSG: #{jti_msg}"
@@ -267,8 +269,8 @@ module Fluent::Plugin
           #     or
           # strip the 1st part of the 1st key
           determinant_sensors.each do |element|
-            #modified_key = element.transform_keys { |key| key.gsub(/[\[\]]/, '') }
-            modified_key = element.transform_keys { |key| key.split('.').drop(1).join('.') }
+            modified_key = element.transform_keys { |key| key.gsub(/[\[\]]/, '') }
+            #modified_key = element.transform_keys { |key| key.split('.').drop(1).join('.') }
             element.replace(modified_key)
           end
 
@@ -282,7 +284,7 @@ module Fluent::Plugin
 
           for data in determinant_sensors
             yield yield_time, data
-         end
+          end
        end   #end unless
       end    #end def parse
    end       #end JuniperJtiParser class
