@@ -1,0 +1,10 @@
+#
+#  place this at the top of the fluent.conf file to enable debug
+#
+#  most, if not all, plugins have some level of debug built into them
+#
+#  output will appear in the fluentd.log file
+#
+<system>
+  log_level debug
+</system>
