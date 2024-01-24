@@ -90,7 +90,7 @@ see the examples directory
 On starting fluentd, Logging supported like below.
 
 ```
-2017-09-12 10:50:44 +0530 [debug]: plugin/parser_juniper_udp_native.rb:63:parse: Extract sensor data from etina:60.60.60.1 with output structured i
+2017-09-12 10:50:44 +0530 [debug]: plugin/parser_juniper_udp_native.rb:63:parse: Extract sensor data from etina:60.60.60.1 
 2017-09-12 10:50:44 +0530 [debug]: plugin/parser_juniper_udp_native.rb:70:parse: ==============================================================
 2017-09-12 10:50:44 +0530 [debug]: plugin/parser_juniper_udp_native.rb:75:parse: jnpr_qmon_ext={"queue_monitor_element_info"=>[{"if_name"=>"xe-2/0/1", ......
 2017-09-12 10:50:44 +0530 [debug]: plugin/parser_juniper_udp_native.rb:76:parse: ==============================================================
