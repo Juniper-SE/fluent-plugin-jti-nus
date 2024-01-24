@@ -90,7 +90,14 @@ see the examples directory
 On starting fluentd, Logging supported like below for the plugin.
 
 ```
-
+2024-01-24 11:34:15 -0500 [debug]: #0 fluent/log.rb:341:debug: Extract sensor data from poc-qfx5110-31:192.168.100.116
+2024-01-24 11:34:15 -0500 [debug]: #0 fluent/log.rb:341:debug: ==============================================================
+2024-01-24 11:34:15 -0500 [debug]: #0 fluent/log.rb:341:debug: TEXT: poc-qfx5110-31:192.168.100.116"[jti:/junos/system/linecard/interface/traffic/:/junos/system/linecard/interface/traffic/..."
+2024-01-24 11:34:15 -0500 [debug]: #0 fluent/log.rb:341:debug: JTI_MSG: <TelemetryStream: system_id: "poc-qfx5110-31:192.168.100.116", component_id: 0, sub_component_id: 0, sensor_name: ...
+2024-01-24 11:34:15 -0500 [debug]: #0 fluent/log.rb:341:debug: SENSOR_STREAM: <EnterpriseSensors: >
+2024-01-24 11:34:15 -0500 [debug]: #0 fluent/log.rb:341:debug: INSPECT : <EnterpriseSensors: >
+2024-01-24 11:34:15 -0500 [debug]: #0 fluent/log.rb:341:debug: [jnpr_interface_ext]={"interfaceStats"=>[{"ifName"=>"gr-0/0/0", "initTime"=>"1701883417", "snmpIfIndex"=>503, "ingressStats"=> ...
+2024-01-24 11:34:15 -0500 [debug]: #0 fluent/log.rb:341:debug: ==============================================================
 ```
 
 ## ACKNOWLEDGEMENT
