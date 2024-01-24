@@ -269,8 +269,8 @@ module Fluent::Plugin
           #     or
           # strip the 1st part of the 1st key
           determinant_sensors.each do |element|
-            modified_key = element.transform_keys { |key| key.gsub(/[\[\]]/, '') }
-            #modified_key = element.transform_keys { |key| key.split('.').drop(1).join('.') }
+            #modified_key = element.transform_keys { |key| key.gsub(/[\[\]]/, '') }
+            modified_key = element.transform_keys { |key| key.split('.').drop(1).join('.') }
             element.replace(modified_key)
           end
 
