@@ -7,10 +7,18 @@
 #   _bucket-name_
 #   _organization-name_
 #
+# NOTE:
+#   https is supported. Remove the "use_ssl false" line and make sure you have
+#     valid certs.
+#
 <match JuniperNetworks.*>
   @type influxdb2
-  url   https://_IP-address-of-the-influx2-server_:_port-it-is-listening-on_
+  url   http://_IP-address-of-the-influx2-server_:_port-it-is-listening-on_
+  use_ssl false
   token _replace-all-of-this-with-your-token_
   bucket _bucket-name_
   org _organization-name_
+  time_key time
+  time_precision 'ms'
+  tag_keys ["device","host","sensor_name"]
 </match>
