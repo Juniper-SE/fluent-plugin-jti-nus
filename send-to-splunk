@@ -1,0 +1,34 @@
+#
+# to use this plugin configuration you need to install the splunk-hec plugin
+#   on the fluentd server
+#     > sudo fluent-gem install fluent-plugin-splunk-hec
+#
+# change all of the following to match your environment
+#
+#   _IP-address-of-the-splunk-server_    (Note: it can be localhost)
+#   _port-it-is-listening-on_             (Note: splunk uses 8088 by default)
+#   _replace-all-of-this-with-your-HEC_token_
+#
+# NOTE:
+#   https is supported by default. This configuration is using http.
+#     To use http, you also need to make changes on the Splunk server
+#     to the file /opt/splunk/etc/apps/splunk_httpinput/default/inputs.conf
+#       Modify these settings under [http] to use http
+#         disabled=0
+#         enableSSL=0
+#
+# NOTE:
+#   data_type metric tells Splunk to treat event messages as if they are metric
+#     messages. I have noticed that occasionally Splunk will complain about 
+#     a bad format.
+#
+<match JuniperNetworks.*>
+  @type splunk_hec
+  hec_host _IP-address-of-the-splunk-server_
+  hec_port _port-it-is-listening-on_
+  hec_token _replace-all-of-this-with-your-HEC_token_
+  protocol http
+  index sandbox
+  source ${tag}
+  data_type metric
+</match>
