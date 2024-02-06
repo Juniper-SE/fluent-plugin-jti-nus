@@ -8,6 +8,7 @@
 #   _IP-address-of-the-splunk-server_    (Note: it can be localhost)
 #   _port-it-is-listening-on_             (Note: splunk uses 8088 by default)
 #   _replace-all-of-this-with-your-HEC_token_
+#   _save-data-to-this-index_
 #
 # NOTE:
 #   https is supported by default. This configuration is using http.
@@ -19,7 +20,7 @@
 #
 # NOTE:
 #   data_type metric tells Splunk to treat event messages as if they are metric
-#     messages. I have noticed that occasionally Splunk will complain about 
+#     messages. I have noticed that occasionally Splunk will complain about
 #     a bad format.
 #
 <match JuniperNetworks.*>
@@ -28,7 +29,7 @@
   hec_port _port-it-is-listening-on_
   hec_token _replace-all-of-this-with-your-HEC_token_
   protocol http
-  index sandbox
+  index _save-data-to-this-index_
   source ${tag}
   data_type metric
 </match>
