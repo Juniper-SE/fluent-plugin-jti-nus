@@ -244,10 +244,11 @@ module Fluent::Plugin
         else
           # need to remove the vendor code from the parsed message
           #   because of an issue in protoc version 25 with ruby output
-          #   we need to remove the next hash key because it shows
-          #   as an extension
-          jnpr_sensors = sensors_decoded["[juniperNetworks]"]
-          #jnpr_sensors = sensors_decoded["[juniperNetworks]"].values.first
+          #   However, I prefer the next key's value as the sensor_name, so
+          #   we need to remove the next hash key otherwise the key will be used
+          #   showing the sensor name with "ext" on the end of it.
+          #jnpr_sensors = sensors_decoded["[juniperNetworks]"]
+          jnpr_sensors = sensors_decoded["[juniperNetworks]"].values.first
           $log.debug  "Extract sensor data from #{device_name}"
           $log.debug "=============================================================="
           $log.debug "TEXT: #{text}"
@@ -267,10 +268,11 @@ module Fluent::Plugin
 
           # strip [] from any key that contains it
           #     or
-          # strip the 1st part of the 1st key
+          # strip the 1st part of the 1st key, use this statement when using
+          #   sensor  with "ext" on the end.
           determinant_sensors.each do |element|
-            #modified_key = element.transform_keys { |key| key.gsub(/[\[\]]/, '') }
-            modified_key = element.transform_keys { |key| key.split('.').drop(1).join('.') }
+            modified_key = element.transform_keys { |key| key.gsub(/[\[\]]/, '') }
+            #modified_key = element.transform_keys { |key| key.split('.').drop(1).join('.') }
             element.replace(modified_key)
           end
 
