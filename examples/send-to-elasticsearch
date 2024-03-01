@@ -1,0 +1,29 @@
+#
+# change all of the following to match your environment
+#
+#   _IP-address-of-the-elastic2-server_    (Note: it can be localhost)
+#   _port-it-is-listening-on_              (Note: elastic uses 9200 by default)
+#   _elastic-dbname_
+#   _elastic-user_
+#   _elastic-password_
+#   _save-data-to-this-index_
+#
+# NOTE:
+#   To use SSL/TLS certs change "ssl_verify" to true and include the following
+#     options: client_cert, client_key, client_key_pass.  Additionally
+#     you may need to include the TLS level option:  ssl_version
+#
+<match JuniperNetworks.*>
+  @type elasticsearch
+  host _IP-address-of-the-elastic-server_
+  port _port-it-is-listening-on_
+  index_name _save-data-to-this-index_
+  user _elastic-user_
+  password _elastic-password_
+  scheme https
+  ssl_verify false
+  time_key time
+  time_precision 'ms'
+  logstach_format true
+  include_tag_key true
+</match>
