@@ -38,7 +38,7 @@ Data from all the sensors are emitted with the same tag. What this means is by d
 
 ## Installation
 
-Download the plugin from `https://git.juniper.net/jawroper/fluent-plugin-jti-nus`
+Download the plugin from `https://github.com/Juniper-SE/fluent-plugin-jti-nus`
 
 Change directory to `<path-of-download>/fluent-plugin-jti-nus`
 
