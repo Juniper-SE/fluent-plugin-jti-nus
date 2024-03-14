@@ -43,7 +43,7 @@ fluent-gem build fluent-plugin-jti-nus.gemspec
 sudo fluent-gem install fluent-plugin-jti-nus-1.0.0.gem
 
 # to allow you to "dry-run" the fluentd.conf file to check for any errors before using it
-sudo chmod 777 /var/log/fluent/fluentd.log
+sudo chmod 777 /var/log/fluent/*
 
 # if you want to use the 23.1 sensors do the following
 cd lib
