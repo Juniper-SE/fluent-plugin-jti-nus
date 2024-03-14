@@ -66,7 +66,7 @@ sudo cp -r * /opt/fluent/lib/ruby/gems/3.2.0/gems/fluent-plugin-jti-nus-1.0.0/li
 <EDIT SETUP and SAVE>
 
 # test your changes
-fluentd --dry-run -c /etc/fluentd/fluentd.conf
+fluentd --dry-run -c /etc/fluent/fluentd.conf
 
 # restart the service to pick up the configuration changes
 sudo systemctl restart fluentd
