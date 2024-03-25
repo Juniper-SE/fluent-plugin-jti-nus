@@ -1,11 +1,15 @@
 RHEL8 Installation Addendum
 
-When installing on RHEL8 the following changed to occur when working through the installation guide
+When installing on RHEL8 the following changed need to occur when working through the installation guide
 
-&nbsp;&nbsp;1) Instead of
-&nbsp;&nbsp;&nbsp;&nbsp;sudo apt-get install -y build-essential
+  1) Instead of
+        sudo apt-get install -y build-essential
      Replace it with
+        dnf group install "Development Tools"
 
-&nbsp;&nbsp;1) Instead of
-&nbsp;&nbsp;&nbsp;&nbsp;curl -fsSL https://toolbelt.treasuredata.com/sh/install-ubuntu-jammy-fluent-package5-lts.sh | sh
-          Replace it with
+  2) Instead of
+        curl -fsSL https://toolbelt.treasuredata.com/sh/install-ubuntu-jammy-fluent-package5-lts.sh | sh
+     Replace it with
+        curl -fsSL https://toolbelt.treasuredata.com/sh/install-redhat-fluent-package5-lts.sh | sh
+
+Also by default RHEL8 may already have a few of the basic packages (Openssh-*, netcat) installed. You may only need to verify that they are installed instead of installing them.
