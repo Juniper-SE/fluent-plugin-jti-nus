@@ -19,7 +19,7 @@ When installing on RHEL8 the following changes need to occur when working throug
 
   4) For package installs, instead of
         sudo apt-get
-     use
+     Use
         sudo dnf
 
 Also by default RHEL8 may already have a few of the basic packages (Openssh-*, netcat) installed.
