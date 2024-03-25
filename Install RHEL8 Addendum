@@ -17,7 +17,6 @@ When installing on RHEL8 the following changes need to occur when working throug
      Replace with
         sudo dnf update
 
-
   4) For package installs, instead of
         sudo apt-get
      use
