@@ -1,0 +1,225 @@
+How to Install and make a FIG (Fluentd / Influxdb / Grafana) Server
+
+
+sudo apt update
+sudo apt-get install -y openssh-client
+sudo apt-get install -y openssh-server
+sudo apt-get install -y netcat
+sudo apt-get install -y build-essential
+sudo add-apt-repository -y ppa:wireshark-dev/stable
+sudo apt update
+sudo apt install -y wireshark
+sudo apt-get install -y adduser libfontconfig1 musl
+#sudo apt-get install -y protobuf-compiler
+sudo apt-get install -y libprotobuf-dev
+
+#####
+#
+# fluentd install on Ubuntu Jammy
+#
+#####
+
+curl -fsSL https://toolbelt.treasuredata.com/sh/install-ubuntu-jammy-fluent-package5-lts.sh | sh
+sudo fluent-gem install fluent-plugin-parser
+sudo fluent-gem install protobuf
+sudo fluent-gem install google-protobuf
+
+# if you want to send your output to influxdb
+sudo fluent-gem install fluent-plugin-influxdb
+
+# if you want to send your output to influxdb2
+sudo fluent-gem install fluent-plugin-influxdb-v2
+
+# Install parser_jti_nus
+mkdir parser_jti_nus
+cd parser_jti_nus
+
+#
+#   GRAB the parser_jti_nus repo from wherever it resides
+#
+unzip fluent-plugin-jti-nus-main.zip
+cd fluent-plugin-jti-nus-main/
+fluent-gem build fluent-plugin-jti-nus.gemspec
+sudo fluent-gem install fluent-plugin-jti-nus-1.0.0.gem
+
+# to allow you to "dry-run" the fluentd.conf file to check for any errors before using it
+sudo chmod -R 777 /var/log/fluent
+
+# if you want to use the 23.1 sensors do the following
+cd lib
+sudo cp * /opt/fluent/lib/ruby/gems/3.2.0/gems/fluent-plugin-jti-nus-1.0.0/lib/
+cd google
+sudo cp -r * /opt/fluent/lib/ruby/gems/3.2.0/gems/fluent-plugin-jti-nus-1.0.0/lib/google
+
+
+# Sensors for the most part are backwards compatible; however, if you want to
+#   use newer sensors you will need to follow these steps. See "COMPILE SENSORs"
+#   later in the document.
+
+# update the fluentd configuration file /etc/fluentd/fluentd.conf.
+#  the README.md file shows the input and rewrite setup to use.
+#  you need to pick or create an output setup to use.
+#
+#  pick the editor of your choice and modify /etc/fluentd/fluentd.conf
+#    you might need to sudo
+
+<EDIT SETUP and SAVE>
+
+# test your changes
+fluentd --dry-run -c /etc/fluent/fluentd.conf
+
+# restart the service to pick up the configuration changes
+sudo systemctl restart fluentd
+
+# monitor the log file for awhile to insure nothing has gone wrong
+tail -f /var/log/fluent/fluentd.log
+
+
+#######
+#
+#  influxdb2 Install
+#
+#######
+
+#
+# influxdata-archive_compat.key GPG fingerprint:
+#     9D53 9D90 D332 8DC7 D6C8 D3B9 D8FF 8E1F 7DF8 B07E
+wget -q https://repos.influxdata.com/influxdata-archive_compat.key
+echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c influxdata-archive_compat.key' | sha256sum -c && cat influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null
+echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main' | sudo tee /etc/apt/sources.list.d/influxdata.list
+sudo apt-get update && sudo apt-get install -y influxdb2
+sudo systemctl enable influxdb
+sudo systemctl start influxdb
+
+# setup influxdb2
+#
+# open a browser to https:<host_name_where_influxdb2_is_installed>:8086
+#
+# click Go
+#
+# Input the following:
+#   <user_name> you want to log in with
+#   <password> you want for the user_name to log in with
+#   confirm the password
+#   <initial_org_name> this is a location within influxdb to storage associated databases.
+#   <initial_bucket_name> this is the name of the initial DB to create
+#
+#   I use the following for my setups
+#      user_name    = <juniper>
+#      password     = <jnpr!123>
+#      init-org     = <juniper>
+#      init-bucket  = <juniper>
+#
+#  you will be presented with a title "You Are ready to go!"
+#    it if CRITICALLY important that you copy and save the API token that is in purple
+#    without the token you will not be able to Store or Retrieve any data from
+#    the org you created.
+#
+#  NOTE: AGAIN, IT IS CRITICALLY important that you copy and save the API token
+#
+#  NOTE: 1 MORE TIME .... IT IS CRITICALLY important that you copy and save the API token
+
+
+#######
+#
+#  Grafana install
+#
+#######
+
+# grab the latest Open Source build for your environment
+
+# https://grafana.com/grafana/download?pg=oss-graf&plcmt=hero-btn-1
+
+cd ~
+wget https://dl.grafana.com/enterprise/release/grafana-enterprise_10.3.1_amd64.deb
+sudo dpkg -i grafana-enterprise_10.3.1_amd64.deb
+
+# if you want to change the grafana configuration edit /etc/grafana/grafana.ini
+
+# start grafana
+sudo /bin/systemctl daemon-reload
+sudo /bin/systemctl enable grafana-server
+sudo /bin/systemctl start grafana-server
+
+# verify that grafana is running
+systemctl status grafana-server.service
+
+# open a browser
+# goto http://localhost:3000
+# login with admin/admin
+# you can change the password if you want or click on "Skip" in the lower left of the dialogue box
+#   if you change the password, you will need to log back in
+#
+# The Welcome to Grafana page will appear. Click on "Data Sources"
+#
+# The "Add data source" page will appear. Click on "InfluxDB"
+#
+# The influxdb page will appear. Do the following:
+#
+#    Enter the URL for the influxdb server http://<server_name_or_IP>:<port_for_influxdb>
+#
+#    Underneath "Custom HTTP Headers" click on "Add header"
+#       Type "Authorization" in the Header input field without the quotes.
+#       The Value input field requires 2 pieces of information. You can not see them as you type them in
+#          Start by typing in "Token " ... DO NOT use quotes. DO add a space after the "n"
+#          Paste the influcDB-APIToken you saved earlier on to what you just typed.
+#
+#    Underneath "InfluxDB Details" add the following
+#       Type <your_db_name> in the Database input field ...  I used "juniper" earler
+#       Type <your_user_name> in the User input field ... I used "juniper" earlier
+#       Select "POST" for the Http Method field
+#
+#    Click "Save & test"
+#
+#
+#    NOTE: The "Custom HTTP Headers" is very poorly documented. You MUST do exactly as I said or "Save & test" will fail.
+#
+#    Example of how to fill in the "Custom HTTP Headers"
+#
+#    -----------                   ---------
+#    | Headers |  Authorization    | Value | Token z4YZHazmmZI4bFehRzzEE5jWVtP6DJn4v8yeqfsVqDpivmZi0Iqi-oy293JY3LIe1Yd2zf3k-oAenU4gwrbJUQ==
+#    -----------                   ---------
+
+
+#####
+#
+#  COMPILE SENSORs
+#
+#     You only need to do this if you want to upgrade to a newer version of the protocol buffer sensors
+#
+#####
+
+# protoc install (latest)
+mkdir protoc
+wget https://github.com/protocolbuffers/protobuf/releases/download/v25.2/protoc-25.2-linux-x86_64.zip
+cd protoc/
+unzip ../protoc-25.2-linux-x86_64.zip
+sudo cp bin/protoc /usr/bin/.
+
+# Download the latest Juniper Networks sensors
+#
+wget https://github.com/Juniper/telemetry/archive/refs/heads/master.zip
+unzip master.unzip
+#
+#  navigate to the Sensors you want to compile
+#
+cd telemetry-master/<high_level_release_num>/<full_release_num>/protos/junos-telemetry-interface
+cp *proto <path_to_jti_nus>/parser_jti_nus/fluent-plugin-jti-nus-main/lib/
+cd <path_to_jti_nus>/parser_jti_nus/fluent-plugin-jti-nus-main/lib/
+# remove the existing ruby compiled proto files
+rm *rb
+
+# compile the descriptor.proto file that gets installed as part of the protoc install
+#   output the result to <path_to_jti_nus>/parser_jti_nus/fluent-plugin-jti-nus-main/lib/google/protobuf/
+#
+protoc -I . -I /usr/include/google/protobuf/ --ruby_out google/protobuf/ /usr/include/google/protobuf/descriptor.proto
+
+#  compile JNPR telemetry protocol buffer failed_records
+#
+protoc -I <path_to_jti_nus>/parser_jti_nus/fluent-plugin-jti-nus-main/lib/ --ruby_out=. *.proto
+
+sudo cp * /opt/fluent/lib/ruby/gems/3.2.0/gems/fluent-plugin-jti-nus-1.0.0/lib/
+cd google
+sudo cp -r * /opt/fluent/lib/ruby/gems/3.2.0/gems/fluent-plugin-jti-nus-1.0.0/lib/google
+
+Need descriptor.proto
