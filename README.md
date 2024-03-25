@@ -107,7 +107,7 @@ On starting fluentd, Logging supported like below.
 This work is based on the Juniper/fluent-plugin-udp-native-sensors github repo
 created by Vijay Gadde in 2017. All of the sensors and 98% of the logic was replaced, so I decided to create a new repo.
 
-Thank you to Todd Carrozzi, Principal RE Juniper Networks, for contributing RHEL8 installation notes and installation notes when working with air-gapped environments. 
+Thank you to Todd Carrozzi, Principal RE Juniper Networks, for contributing RHEL8 installation notes.
 
 ## TODO
 

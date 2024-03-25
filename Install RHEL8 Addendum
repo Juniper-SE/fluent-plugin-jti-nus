@@ -4,13 +4,24 @@ When installing on RHEL8 the following changes need to occur when working throug
 
   1) Instead of
         sudo apt-get install -y build-essential
-     Replace it with
-        dnf group install "Development Tools"
+     Replace with
+        sudo dnf group install "Development Tools"
 
   2) Instead of
         curl -fsSL https://toolbelt.treasuredata.com/sh/install-ubuntu-jammy-fluent-package5-lts.sh | sh
-     Replace it with
+     Replace with
         curl -fsSL https://toolbelt.treasuredata.com/sh/install-redhat-fluent-package5-lts.sh | sh
+
+  3) Updating local package index, instead of
+        sudo apt update
+     Replace with
+        sudo dnf update
+
+
+  4) For package installs, instead of
+        sudo apt-get
+     use
+        sudo dnf
 
 Also by default RHEL8 may already have a few of the basic packages (Openssh-*, netcat) installed.
 You may only need to verify that they are installed instead of installing them.
