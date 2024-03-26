@@ -20,6 +20,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "fluentd"
   s.add_runtime_dependency "protobuf", '>= 3.10.8'
   s.add_runtime_dependency "time", '>= 0.2.2'
-  s.add_runtime_dependency "fluent-plugin-parser"
+#
+# starting with version v0.5.0 of fluent-plugin-parser it checks the fluentd version using ~>
+#   for this reason, we need to use the last version of fluent-plugin-parser that supports >=
+#   that version is v0.4.1
+#
+  s.add_runtime_dependency "fluent-plugin-parser", '=0.4.1'
   s.add_runtime_dependency "fluent-plugin-rewrite-tag-filter"
 end
